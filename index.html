@@ -16,17 +16,31 @@
       href="./tasks.css" />
     <link
       rel="icon"
-      type="image/png"
+      type="image/svg+xml"
       sizes="32x32"
       href="./assets/favicon.svg" />
     <script
       defer
+      src="./darkmode.js"
+      type="module"></script>
+    <script
+      defer
       src="./scripts.js"
       type="module"></script>
+    <script
+      defer
+      src="sidebar.js"></script>
     <title>Kanban Task Management</title>
   </head>
 
   <body>
+    <div
+      id="loading-banner"
+      class="loading-banner"
+      style="display: none">
+      <div class="spinner"></div>
+      <span>Loading tasks...</span>
+    </div>
     <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
     <nav
       class="side-bar"
@@ -43,8 +57,28 @@
         id="boards-nav-links-div">
         <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
         <button class="board-btn">Launch Career</button>
+        <!-- Dark/Light Mode Toggle -->
+        <div class="toggle-container">
+          <label class="theme-switch">
+            <input
+              type="checkbox"
+              id="theme-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <button
+          id="hide-sidebar-btn"
+          class="hide-sidebar-btn">
+          Hide Sidebar
+        </button>
       </div>
     </nav>
+    <button
+      id="show-sidebar-btn"
+      class="show-sidebar-btn"
+      style="display: none">
+      ➡ Show
+    </button>
 
     <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
     <div id="layout">
@@ -171,7 +205,7 @@
           <button
             type="button"
             id="update-task-btn">
-            Update Task
+            Save Changes
           </button>
           <button
             type="button"
