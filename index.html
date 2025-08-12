@@ -36,22 +36,28 @@
   <body>
     <div
       id="loading-banner"
-      class="loading-banner"
-      style="display: none">
+      class="loading-banner">
       <div class="spinner"></div>
       <span>Loading tasks...</span>
     </div>
     <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
+    <div
+      class="overlay"
+      id="overlay"></div>
     <nav
       class="side-bar"
       id="side-bar-div">
+      <button
+        class="topbar-close-btn"
+        id="topbar-close">
+        &times;
+      </button>
       <div id="side-logo-div">
         <img
           id="logo"
           src="./assets/logo-light.svg"
           alt="logo-light" />
       </div>
-
       <div
         class="boards-nav-links-div"
         id="boards-nav-links-div">
