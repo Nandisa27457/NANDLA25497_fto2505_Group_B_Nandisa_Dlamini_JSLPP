@@ -3,6 +3,17 @@ const API_URL = "https://jsl-kanban-api.vercel.app/";
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let selectedTaskId = null;
 
+// === SHOW LOADING MESSAGE BRIEFLY ===
+function showLoadingMessageBriefly() {
+  console.log("showLoadingMessageBriefly() called");
+  const loadingBanner = document.getElementById("loading-banner");
+  if (!loadingBanner) return; // Prevents errors if banner not in HTML
+  loadingBanner.classList.add("show");
+  setTimeout(() => {
+    loadingBanner.classList.remove("show");
+  }, 500); // Half a second
+}
+
 // Fetch from API only if localStorage empty
 async function fetchTasksFromAPI() {
   try {
@@ -102,11 +113,16 @@ function setupDeleteTaskHandler() {
   const deleteBtn = document.getElementById("delete-task-btn");
   deleteBtn.addEventListener("click", () => {
     if (selectedTaskId !== null) {
-      tasks = tasks.filter((t) => t.id !== selectedTaskId);
-      saveTasksToLocalStorage();
-      renderTasks(tasks);
-      document.getElementById("task-modal").close();
-      selectedTaskId = null;
+      // Show native confirm dialog
+      const confirmed = confirm("Are you sure you want to delete this task?");
+      if (confirmed) {
+        tasks = tasks.filter((t) => t.id !== selectedTaskId);
+        saveTasksToLocalStorage();
+        renderTasks(tasks);
+        document.getElementById("task-modal").close();
+        selectedTaskId = null;
+      }
+      // else do nothing if cancelled
     }
   });
 }
@@ -156,6 +172,8 @@ function setupAddTaskFormHandler() {
 }
 
 function initTaskBoard() {
+  // Always show banner briefly on refresh
+  showLoadingMessageBriefly();
   if (tasks.length === 0) {
     fetchTasksFromAPI();
   } else {
