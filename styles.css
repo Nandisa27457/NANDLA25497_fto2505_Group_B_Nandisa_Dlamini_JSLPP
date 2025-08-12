@@ -17,32 +17,28 @@
 Loading message banner
 =======================*/
 .loading-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #222;
-  color: #fff;
-  padding: 10px;
-  font-size: 16px;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  background: #f4f7fd;
+  color: #635fc7;
+  text-align: center;
+  padding: 10px;
   z-index: 9999;
-  gap: 10px;
-
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
+  font-weight: bold;
 }
 
 .loading-banner.light-mode {
-  background-color: #f0f0f0;
+  background-color: #635fc7;
   color: #333;
 }
 
 .spinner {
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  left: 620px;
+  border: 3px solid #635fc7;
   border-top: 3px solid #fff;
   border-radius: 50%;
   width: 18px;
@@ -55,17 +51,26 @@ Loading message banner
   border-top: 3px solid #333;
 }
 
+body.dark-mode#loading-banner {
+  background-color: #20212c;
+}
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* When visible */
 .loading-banner.show {
+  display: block;
   opacity: 1;
+  max-height: 100px;
   visibility: visible;
 }
-
 
 /* ================
    Base Elements
@@ -135,7 +140,7 @@ h4 {
   font-weight: bold;
   cursor: pointer;
   overflow: hidden; /* Prevents overflowed text/icons from showing */
-  margin-bottom:320px;
+  margin-bottom: 320px;
 }
 /* Hide Side Bar Button*/
 
@@ -153,26 +158,28 @@ h4 {
   margin-top: 15px;
   padding: 8px;
   width: 100%;
-  background-color:var(--secondary-color);
-  color: #635FC7;
+  background-color: var(--secondary-color);
+  color: #635fc7;
   border: none;
   cursor: pointer;
-  position:relative;
-  right:30px;
+  position: relative;
+  right: 30px;
 }
 
 /* Show button style */
 .show-sidebar-btn {
-  position:fixed;
-  right:1230px ;
+  position: fixed;
+  right: 1230px;
   top: 93%;
   transform: translateY(-50%);
-  background-color: #A8A4FF;
+  background-color: #a8a4ff;
   color: white;
   padding: 8px 10px;
   border: none;
   cursor: pointer;
-
+}
+#topbar-close {
+  display: none;
 }
 
 /*Toggle dark mode*/
@@ -184,8 +191,6 @@ h4 {
   transform: translateX(-100%);
 }
 
-
-
 /* Dark/Light toggle switch */
 .theme-switch {
   position: relative;
@@ -193,8 +198,7 @@ h4 {
   width: 40px;
   height: 20px;
   margin-top: 10px;
-  margin-left:80px;
-  
+  margin-left: 80px;
 }
 .theme-switch input {
   display: none;
@@ -202,8 +206,11 @@ h4 {
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color:#635FC7;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #635fc7;
   transition: 0.4s;
   border-radius: 20px;
 }
@@ -219,56 +226,57 @@ h4 {
   border-radius: 50%;
 }
 input:checked + .slider {
-  background-color:black;
+  background-color: black;
 }
 input:checked + .slider:before {
   transform: translateX(20px);
 }
 
 .toggle-container {
-  background-color:#F4F7FD ;
+  background-color: #f4f7fd;
   padding: 8px 12px;
   border-radius: 8px;
-  width:251px;
-  height:48px;
-  position:relative;
-  bottom:10px;
+  width: 251px;
+  height: 48px;
+  position: relative;
+  bottom: 10px;
 }
 
 /* Dark mode styles */
 body.dark-mode {
-  background-color:#20212C;
+  background-color: #20212c;
   color: #eaeaea;
 }
 body.dark-mode #side-bar-div {
-  background-color: #20212C;
+  background-color: #20212c;
 }
 
 body.dark-mode .hide-sidebar-btn {
-  background-color: #635FC7;
-  color:white;
+  background-color: #635fc7;
+  color: white;
 }
 
 body.dark-mode .tasks-container {
-  background-color: #20212C;
+  background-color: #20212c;
 }
 
-body.dark-mode .task-div{
-  background-color: #2B2C37;
-  color:white;
-  
+body.dark-mode .task-div {
+  background-color: #2b2c37;
+  color: white;
 }
 
-body.dark-mode header{
-  background-color: #20212C;
-  color:white;
+body.dark-mode header {
+  background-color: #20212c;
+  color: white;
 }
 
 body.dark-mode .toggle-container {
-  background-color: #635FC7;
+  background-color: #635fc7;
 }
 
- 
+body.dark-mode dialog {
+  background-color: #20212c;
+}
 /* ===============
    Main Layout
 ================ */
@@ -280,11 +288,11 @@ body.dark-mode .toggle-container {
 
 #layout {
   transition: margin-left 0.3s ease;
-   width:100vh ;
+  width: 100vh;
 }
 
 #layout.full-width {
-  width:100vh;
+  width: 100vh;
 }
 
 /* ===============
@@ -435,6 +443,14 @@ h2 {
   width: 479px;
   height: 479px;
 }
+body.dark-mode #task-modal {
+  background: #2b2c37;
+  color: #eee;
+  box-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
+}
+body.dark-mode h2 {
+  color: white;
+}
 
 /* Style the modal box */
 #task-modal::backdrop {
@@ -537,6 +553,10 @@ label.status {
 
 select#task-status {
   margin-bottom: 20px;
+  background-color: whitesmoke;
+}
+select#new-task-status {
+  background-color: whitesmoke;
 }
 input#task-title {
   margin-bottom: 40px;
@@ -573,13 +593,97 @@ form select {
 /******** Tablets ********/
 @media screen and (max-width: 1023px) {
   .side-bar {
-    display: none; /* Hide sidebar on tablets and smaller */
+    display: none; /* Hide sid smaller */
   }
+  @media screen and (max-width: 1023px) {
+    /* Hide sidebar by default on mobile */
+    .side-bar {
+      display: none;
+    }
 
-  .side-bar.show-sidebar {
-    display: flex !important;
-    position: fixed; /* Overlay on top of page */
-    height: auto;
+    /* Modal overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      margin-top: 66px;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Topbar modal style */
+    .side-bar.topbar {
+      display: block !important;
+      position: fixed;
+      top: 16.59%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background: var(--sidebar-bg, #fff);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      z-index: 2000;
+      height: 249px;
+    }
+   
+    
+    .board-btn{
+    right:20px;
+    }
+
+    div.toggle-container {
+      position: relative;
+      bottom: 305px;
+    }
+
+    button#hide-sidebar-btn.hide-sidebar-btn {
+      display: none;
+    }
+
+    button#topbar-close.topbar-close-btn {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 2.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #ea5555;
+      transition: transform 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+      transition-delay: 0.1s; /* Delay before scaling */
+      position: block;
+      left: 190px;
+      bottom: 25px;
+    }
+    /* Close button */
+    .topbar-close-btn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hide original sidebar logo on mobile */
+    #side-logo-div {
+      display: none;
+    }
+
+    /* Show mobile logo */
+    .logo-mobile {
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
   }
 
   #side-logo-div {
