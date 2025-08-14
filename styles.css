@@ -142,7 +142,7 @@ h4 {
   overflow: hidden; /* Prevents overflowed text/icons from showing */
   margin-bottom: 320px;
 }
-/* Hide Side Bar Button*/
+
 
 /* Sidebar transition */
 .side-bar {
@@ -164,6 +164,8 @@ h4 {
   cursor: pointer;
   position: relative;
   right: 30px;
+  display:flex;
+  justify-content: space-evenly;
 }
 
 /* Show button style */
@@ -178,10 +180,26 @@ h4 {
   border: none;
   cursor: pointer;
 }
+
+/*Imgages around toggle*/
+img#show-img{
+  position: relative;
+  left:185px;
+}
 #topbar-close {
   display: none;
 }
 
+#moon-logo{
+  position: relative;
+  left:150px;
+}
+
+
+#sun-logo{
+  position: relative;
+  left:90px;
+}
 /*Toggle dark mode*/
 /* Sidebar animation */
 #side-bar-div {
@@ -441,7 +459,7 @@ h2 {
   background: none;
   overflow: hidden;
   width: 479px;
-  height: 479px;
+  height: 587px;
 }
 body.dark-mode #task-modal {
   background: #2b2c37;
@@ -459,7 +477,7 @@ body.dark-mode h2 {
 
 #add-task-modal.modal {
   width: 479px;
-  height: 430px;
+  height: 550px;
   border: none;
   border-radius: 5px;
   overflow: hidden;
@@ -478,14 +496,22 @@ button {
 button#delete-task-btn {
   background-color: #ea5555;
   width: 200px;
+  
 }
 
+#task-priority{
+  margin-bottom:40px;
+}
+#new-task-priority{
+  margin-bottom:30px;
+}
 button#update-task-btn {
   background-color: #635fc7;
   width: 200px;
   margin-right: 30px;
   margin-left: 50px;
 }
+
 #task-modal {
   top: 40%;
   left: 50%;
@@ -749,6 +775,15 @@ form select {
   .column-div {
     width: 100%;
   }
+    span.new-task-text {
+    display: none;
+  }
+
+  button#open-add-task-btn {
+    width: 33px;
+    height: 33px;
+  }
+
 }
 
 /******** Mobile ********/
@@ -787,7 +822,7 @@ form select {
   }
 
   img.logo-mobile {
-    margin-right: 445px;
+    margin-right:300px;
   }
 
   .close-btn {
