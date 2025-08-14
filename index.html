@@ -65,6 +65,8 @@
         <button class="board-btn">Launch Career</button>
         <!-- Dark/Light Mode Toggle -->
         <div class="toggle-container">
+          <img id="sun-logo"src="./assets/icon-light-theme.svg">
+          <img id="moon-logo"src="./assets/icon-dark-theme.svg">
           <label class="theme-switch">
             <input
               type="checkbox"
@@ -72,18 +74,26 @@
             <span class="slider"></span>
           </label>
         </div>
-        <button
-          id="hide-sidebar-btn"
-          class="hide-sidebar-btn">
-          Hide Sidebar
-        </button>
+        <div class="hide-container">
+          <button
+            id="hide-sidebar-btn"
+            class="hide-sidebar-btn">
+            <img
+              id="hide-img"
+              src="./assets/icon-hide-sidebar.svg" />
+            Hide Sidebar
+          </button>
+        </div>
       </div>
     </nav>
     <button
       id="show-sidebar-btn"
       class="show-sidebar-btn"
       style="display: none">
-      ➡ Show
+      <img
+        id="show-img"
+        src="./assets/icon-show-sidebar.svg" />
+        Show
     </button>
 
     <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
