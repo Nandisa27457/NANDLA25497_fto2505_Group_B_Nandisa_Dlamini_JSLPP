@@ -1,0 +1,845 @@
+/* ========================
+   Global & Root Variables
+======================== */
+* {
+  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+}
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #f4f7fd;
+  --primary-font-color: #000000;
+  --secondary-font-color: #828fa3;
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
+  --sidebar-width: 300px; /* Sidebar fixed width */
+}
+/*=====================
+Loading message banner
+=======================*/
+.loading-banner {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #f4f7fd;
+  color: #635fc7;
+  text-align: center;
+  padding: 10px;
+  z-index: 9999;
+  font-weight: bold;
+}
+
+.loading-banner.light-mode {
+  background-color: #635fc7;
+  color: #333;
+}
+
+.spinner {
+  position: relative;
+  left: 620px;
+  border: 3px solid #635fc7;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.7s linear infinite;
+}
+
+.loading-banner.light-mode .spinner {
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-top: 3px solid #333;
+}
+
+body.dark-mode#loading-banner {
+  background-color: #20212c;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* When visible */
+.loading-banner.show {
+  display: block;
+  opacity: 1;
+  max-height: 100px;
+  visibility: visible;
+}
+
+/* ================
+   Base Elements
+================ */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex; /* Allow layout to span horizontally */
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--secondary-color);
+  font-size: 1rem; /* Base font size for rem scaling */
+}
+
+/* ================
+   Sidebar Layout
+================ */
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  border-right: 1px solid #e4ebfa; /* Light divider */
+  width: var(--sidebar-width);
+  height: 100vh;
+}
+
+#side-logo-div {
+  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+}
+
+#logo {
+  width: 100%; /* Make logo responsive within container */
+}
+
+.boards-nav-links-div {
+  display: flex;
+  flex-direction: column;
+  color: var(--primary-font-color);
+}
+
+#headline-sidepanel {
+  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+}
+
+h4 {
+  color: var(--secondary-font-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem; /* Makes heading more spaced */
+}
+
+.board-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #635fc7;
+  color: #fff;
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  margin-bottom: 320px;
+}
+
+
+/* Sidebar transition */
+.side-bar {
+  transition: transform 0.3s ease-in-out;
+}
+
+.side-bar.hidden {
+  transform: translateX(-100%);
+  display:none;
+}
+
+/* Hide button style */
+.hide-sidebar-btn {
+  margin-top: 15px;
+  padding: 8px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  color: #635fc7;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  right: 30px;
+  display:flex;
+  justify-content: space-evenly;
+}
+
+/* Show button style */
+.show-sidebar-btn {
+  position: fixed;
+  right: 1230px;
+  top: 93%;
+  transform: translateY(-50%);
+  background-color: #a8a4ff;
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/*Imgages around toggle*/
+img#show-img{
+  position: relative;
+  left:185px;
+}
+#topbar-close {
+  display: none;
+}
+
+#moon-logo{
+  position: relative;
+  left:150px;
+}
+
+
+#sun-logo{
+  position: relative;
+  left:90px;
+}
+/*Toggle dark mode*/
+/* Sidebar animation */
+#side-bar-div {
+  transition: transform 0.3s ease;
+}
+#side-bar-div.hidden {
+  transform: translateX(-100%);
+}
+
+/* Dark/Light toggle switch */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-top: 10px;
+  margin-left: 80px;
+}
+.theme-switch input {
+  display: none;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #635fc7;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: black;
+}
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-container {
+  background-color: #f4f7fd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: 251px;
+  height: 48px;
+  position: relative;
+  bottom: 10px;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #20212c;
+  color: #eaeaea;
+}
+body.dark-mode #side-bar-div {
+  background-color: #20212c;
+}
+
+body.dark-mode .hide-sidebar-btn {
+  background-color: #635fc7;
+  color: white;
+}
+
+body.dark-mode .tasks-container {
+  background-color: #20212c;
+}
+
+body.dark-mode .task-div {
+  background-color: #2b2c37;
+  color: white;
+}
+
+body.dark-mode header {
+  background-color: #20212c;
+  color: white;
+}
+
+body.dark-mode .toggle-container {
+  background-color: #635fc7;
+}
+
+body.dark-mode dialog {
+  background-color: #20212c;
+}
+/* ===============
+   Main Layout
+================ */
+#layout {
+  flex: 1; /* Fills remaining space beside sidebar */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+}
+
+#layout {
+  transition: margin-left 0.3s ease;
+  width: 100vh;
+}
+
+#layout.full-width {
+  width: 100vh;
+}
+
+/* ===============
+   Header Section
+================ */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  height: 96px;
+  padding: 0 35px 0 30px;
+  border-bottom: 1px solid #e4ebfa;
+  width: 100%;
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.header-name-div {
+  display: flex;
+  align-items: center;
+}
+
+.logo-mobile {
+  display: none; /* Hidden on desktop; shown on smaller screens */
+}
+
+/* ===============
+   Board Columns
+================ */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  box-sizing: border-box;
+}
+
+.card-column-main {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    minmax(0, 304px)
+  ); /* 3 columns with min size */
+  gap: 8px; /* Space between columns */
+}
+
+.column-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 12px;
+}
+
+.column-head-div {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between dot and column title */
+}
+
+.columnHeader {
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  color: var(--secondary-font-color);
+  margin: 0;
+}
+
+/* Status Dots */
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%; /* Make it circular */
+  display: inline-block;
+}
+
+#todo-dot {
+  background-color: #49c4e5;
+}
+
+#doing-dot {
+  background-color: #8471f2;
+}
+
+#done-dot {
+  background-color: #219c90;
+}
+
+/* ===============
+   Task Cards
+================ */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-div {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  width: 100%;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  border-radius: 12px;
+  box-shadow: var(--primary-box-shadow);
+  cursor: pointer; /* Indicate it's clickable */
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+/*Add Task button*/
+
+#open-add-task-btn {
+  background-color: #635fc7;
+  color: #ffffff;
+  width: 164px;
+  height: 48px;
+  border: none;
+  border-radius: 24px;
+}
+
+h2#header-board-name.header-board-name {
+  margin-right: 570px;
+}
+
+/* ===============
+   Headings
+================ */
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  margin-top: 20px;
+}
+
+/* ===============
+   Modal Styles
+================ */
+/* Remove default dialog styles */
+#task-modal {
+  position: fixed;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  overflow: hidden;
+  width: 479px;
+  height: 587px;
+}
+body.dark-mode #task-modal {
+  background: #2b2c37;
+  color: #eee;
+  box-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
+}
+body.dark-mode h2 {
+  color: white;
+}
+
+/* Style the modal box */
+#task-modal::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#add-task-modal.modal {
+  width: 479px;
+  height: 550px;
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+button {
+  background-color: #635fc7;
+  color: white;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  font-size: 13px;
+  width: 400px;
+}
+
+button#delete-task-btn {
+  background-color: #ea5555;
+  width: 200px;
+  
+}
+
+#task-priority{
+  margin-bottom:40px;
+}
+#new-task-priority{
+  margin-bottom:30px;
+}
+button#update-task-btn {
+  background-color: #635fc7;
+  width: 200px;
+  margin-right: 30px;
+  margin-left: 50px;
+}
+
+#task-modal {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  /*font-family: "Plus Jakarta Sans", sans-serif;*/
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #ea5555;
+  transition: transform 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+  transition-delay: 0.1s; /* Delay before scaling */
+  position: relative;
+  left: 200px;
+  bottom: 25px;
+}
+
+.close-btn:hover {
+  transform: scale(1.15);
+  font-weight: 600;
+}
+
+.close-btn:focus {
+  outline: none;
+}
+
+/* Form elements */
+form label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.75em;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  color: #828fa3;
+}
+
+/*Label styling for new modal*/
+
+label.status {
+  margin-bottom: 20px;
+}
+
+select#task-status {
+  margin-bottom: 20px;
+  background-color: whitesmoke;
+}
+select#new-task-status {
+  background-color: whitesmoke;
+}
+input#task-title {
+  margin-bottom: 40px;
+}
+textarea#task-desc {
+  margin-bottom: 40px;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #828fa3;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.8125em;
+  resize: vertical;
+}
+
+form select {
+  appearance: none; /* Remove native arrow */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="%23828FA3" stroke-width="3" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>')
+    no-repeat right 0.75rem center;
+
+  background-size: 1.4rem;
+  padding-right: 1rem;
+}
+
+/* ========================
+   Responsive Styles
+======================== */
+
+/******** Tablets ********/
+@media screen and (max-width: 1023px) {
+  .side-bar {
+    display: none; /* Hide sid smaller */
+  }
+  @media screen and (max-width: 1023px) {
+    /* Hide sidebar by default on mobile */
+    .side-bar {
+      display: none;
+    }
+
+    /* Modal overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      margin-top: 66px;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Topbar modal style */
+    .side-bar.topbar {
+      display: block !important;
+      position: fixed;
+      top: 16.59%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 400px;
+      background: var(--sidebar-bg, #fff);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      z-index: 2000;
+      height: 249px;
+    }
+   
+    
+    .board-btn{
+    right:20px;
+    }
+
+    div.toggle-container {
+      position: relative;
+      bottom: 305px;
+    }
+
+    button#hide-sidebar-btn.hide-sidebar-btn {
+      display: none;
+    }
+
+    button#topbar-close.topbar-close-btn {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 2.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #ea5555;
+      transition: transform 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+      transition-delay: 0.1s; /* Delay before scaling */
+      position: block;
+      left: 160px;
+      bottom: 25px;
+    }
+    /* Close button */
+    .topbar-close-btn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hide original sidebar logo on mobile */
+    #side-logo-div {
+      display: none;
+    }
+
+    /* Show mobile logo */
+    .logo-mobile {
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  #side-logo-div {
+    display: none;
+  }
+
+  .logo-mobile {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+
+  body {
+    font-size: 0.8rem;
+  }
+
+  .board-btn {
+    font-size: 0.8rem;
+    padding-left: 15px;
+    margin-right: 15px;
+    font-weight: 700;
+  }
+
+  .container {
+    padding: 0;
+    width: 100%;
+    align-items: center; /* Center columns on smaller screens */
+  }
+
+  .card-column-main {
+    grid-template-columns: repeat(2, minmax(0, 360px));
+    gap: 8px;
+  }
+
+  header {
+    height: 64px;
+    padding: 0 10px 0 18px;
+    border: none;
+  }
+
+  #header-board-name {
+    font-size: 1rem;
+  }
+
+  .task-div {
+    width: 100%;
+  }
+
+  .columnHeader {
+    font-size: 0.75rem;
+  }
+
+  .dot {
+    height: 8px;
+    width: 8px;
+  }
+
+  .column-head-div {
+    gap: 8px;
+  }
+
+  .column-div {
+    width: 100%;
+  }
+    span.new-task-text {
+    display: none;
+  }
+
+  button#open-add-task-btn {
+    width: 33px;
+    height: 33px;
+  }
+
+}
+
+/******** Mobile ********/
+@media screen and (max-width: 576px) {
+  .card-column-main {
+    grid-template-columns: minmax(
+      0,
+      380px
+    ); /* Stack columns in single column */
+  }
+
+  .column-div {
+    padding: 24px;
+  }
+
+  #add-task-modal.modal {
+    width: 343px;
+  }
+  button {
+    width: 329px;
+    position: relative;
+    right: 9px;
+  }
+
+  h2#header-board-name.header-board-name {
+    display: none;
+  }
+
+  span.new-task-text {
+    display: none;
+  }
+
+  button#open-add-task-btn {
+    width: 33px;
+    height: 33px;
+  }
+
+  img.logo-mobile {
+    margin-right:300px;
+  }
+
+  .close-btn {
+    position: relative;
+    left: 130px;
+  }
+
+  button#update-task-btn {
+    width: 300px;
+    margin-bottom: 10px;
+    position: relative;
+    right:55px;
+  }
+
+  button#delete-task-btn {
+    width: 300px;
+    
+  }
+}
