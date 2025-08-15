@@ -122,6 +122,6 @@ kanban-task-board/
 
 ## Presentation 
 
-````
+
 [Loom Presentation](<https://www.loom.com/share/f4262476f4864dc6b7dc2947991eafc2?sid=f18dc0cc-fa78-46fa-b54f-04f3e5fda9c1>)
-````
+
