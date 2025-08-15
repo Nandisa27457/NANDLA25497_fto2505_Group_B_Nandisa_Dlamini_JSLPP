@@ -8,15 +8,13 @@ let isTopbarOpen = false; // For mobile toggle state
 
 // Hide sidebar (desktop)
 hideBtn.addEventListener("click", () => {
-  sidebar.classList.add("hidden");
-  layout.classList.add("#layout");
+  sidebar.classList.add("hidden");;
   showBtn.style.display = "block";
 });
 
 // Show sidebar (desktop)
 showBtn.addEventListener("click", () => {
   sidebar.classList.remove("hidden");
-  layout.classList.remove("#layout");
   showBtn.style.display = "none";
 });
 
