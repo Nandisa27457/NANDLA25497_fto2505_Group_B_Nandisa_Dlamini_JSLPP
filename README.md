@@ -31,7 +31,6 @@ This project involves deploying a Kanban app to Netlify, ensuring the app's func
 
 - **Responsive design** for desktop and mobile
 
-## Installation
 
 ## Installation
 
