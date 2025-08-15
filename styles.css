@@ -684,7 +684,7 @@ form select {
       transition: transform 0.2s ease-in-out, font-weight 0.2s ease-in-out;
       transition-delay: 0.1s; /* Delay before scaling */
       position: block;
-      left: 190px;
+      left: 160px;
       bottom: 25px;
     }
     /* Close button */
@@ -834,10 +834,12 @@ form select {
   button#update-task-btn {
     width: 300px;
     margin-bottom: 10px;
+    position: relative;
+    right:55px;
   }
 
   button#delete-task-btn {
     width: 300px;
-    margin-left: 45px;
+    
   }
 }
