@@ -25,6 +25,7 @@ let isTopbarOpen = false; // For mobile toggle state
 hideBtn.addEventListener("click", () => {
   sidebar.classList.add("hidden");;
   showBtn.style.display = "block";
+  
 });
 
 /**
